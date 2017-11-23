@@ -23,16 +23,6 @@ public class AdapterPaginas extends FragmentPagerAdapter {
                 return new BlankFragment();
             case 2:
                 return new BlankFragment();
-            case 3:
-                return new BlankFragment();
-            case 4:
-                return new BlankFragment();
-            case 5:
-                return new BlankFragment();
-            case 6:
-                return new BlankFragment();
-            case 7:
-                return new BlankFragment();
 
             default:
                 return null;
@@ -41,28 +31,18 @@ public class AdapterPaginas extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 7;
+        return 3;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "Games";
+                return "Filmes";
             case 1:
-                return "HQS";
-            case 2:
                 return "Series";
-            case 3:
-                return "Youtube";
-            case 4:
-                return "Reviews";
-            case 5:
-                return "Listas";
-            case 6:
-                return "Equipe";
-            case 7:
-                return "Contato";
+            case 2:
+                return "Pessoas";
             default:
                 return null;
         }

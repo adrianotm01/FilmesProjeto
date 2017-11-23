@@ -1,6 +1,5 @@
 package com.example.mand4.projetofinal;
 
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -9,34 +8,33 @@ import java.util.Date;
 
 public class Noticia {
 
-    private String nome;
-    private String descricao;
+    private String original_title;
+    private String overview;
     private int imagem;
-    private int visitas;
-    private Date horas;
-
-    public Noticia(String nome, String descricao, int imagem, int visitas, Date horas) {
-        this.nome = nome;
-        this.descricao = descricao;
+    private String name;
+    private int id;
+    public Noticia(String original_title, String overview, int imagem, String name, int id) {
+        this.original_title = original_title;
+        this.overview = overview;
         this.imagem = imagem;
-        this.visitas = visitas;
-        this.horas = horas;
+        this.name = name;
+        this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getOriginal_title() {
+        return original_title;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setOriginal_title(String original_title) {
+        this.original_title = original_title;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getOverview() {
+        return overview;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setOverview(String overview) {
+        this.overview = overview;
     }
 
     public int getImagem() {
@@ -47,19 +45,19 @@ public class Noticia {
         this.imagem = imagem;
     }
 
-    public int getVisitas() {
-        return visitas;
+    public String getName() {
+        return name;
     }
 
-    public void setVisitas(int visitas) {
-        this.visitas = visitas;
+    public void setName(String name) {
+        this.name = name;
+    }
+    public int getId() {
+        return id;
     }
 
-    public Date getHoras() {
-        return horas;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setHoras(Date horas) {
-        this.horas = horas;
-    }
 }
