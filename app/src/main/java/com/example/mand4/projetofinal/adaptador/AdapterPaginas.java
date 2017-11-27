@@ -1,8 +1,11 @@
-package com.example.mand4.projetofinal;
+package com.example.mand4.projetofinal.adaptador;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.example.mand4.projetofinal.BlankFragment;
+import com.example.mand4.projetofinal.BlankFragment2;
 
 /**
  * Created by mand4 on 21/11/2017.
@@ -22,7 +25,7 @@ public class AdapterPaginas extends FragmentPagerAdapter {
             case 1:
                 return new BlankFragment();
             case 2:
-                return new BlankFragment();
+                return new BlankFragment2();
 
             default:
                 return null;

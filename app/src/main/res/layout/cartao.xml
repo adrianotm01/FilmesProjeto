@@ -2,72 +2,82 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="160dp
-"
-    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    android:layout_width="wrap_content"
     android:paddingTop="50dp"
     android:focusable="true"
+    android:clickable="true"
+    android:elevation="10dp"
+    android:layout_marginTop="15dp"
+    app:cardBackgroundColor="@color/cardview_light_background"
+    android:foreground="?android:attr/selectableItemBackground"
     >
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
+    <GridLayout
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:columnCount="4"
+        android:rowCount="3">
 
-        <TextView
-            android:id="@+id/titulo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="It,A coisa"
-            android:textColor="#000000"
-            android:textSize="30dp"
-            tools:layout_editor_absoluteX="2dp"
-            tools:layout_editor_absoluteY="6dp" />
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="57dp"
+            android:layout_height="67dp"
+            android:layout_column="0"
+            android:layout_row="0"
+            android:layout_marginTop="36dp"
+            app:srcCompat="@drawable/ceu" />
+
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:paddingRight="5dp"
-            android:src="@drawable/ic_date_range_black_24dp"
-            tools:layout_editor_absoluteX="2dp"
-            tools:layout_editor_absoluteY="42dp" />
+            android:layout_column="1"
+            android:layout_row="1"
+            android:src="@drawable/ic_date_range_black_24dp" />
 
         <TextView
             android:id="@+id/ano1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="7dp"
-            android:text="2017"
-            tools:layout_editor_absoluteY="42dp"
-            tools:layout_editor_absoluteX="39dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/categorias"
-            android:layout_marginEnd="3dp"
-            android:text="Drama,Fantasia,Terror,Thriller"
-            tools:layout_editor_absoluteX="196dp"
-            tools:layout_editor_absoluteY="54dp" />
+            android:layout_column="1"
+            android:layout_marginStart="30dp"
+            android:layout_row="1"
+            android:text="2017" />
 
         <TextView
             android:id="@+id/nota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="7,5"
-            tools:layout_editor_absoluteX="339dp"
-            tools:layout_editor_absoluteY="16dp" />
+            android:layout_column="1"
+            android:layout_row="0"
+            android:layout_marginStart="275dp"
+            android:text="7,5" />
+
         <TextView
-            android:id="@+id/descricao"
-            android:layout_width="140dp"
+            android:id="@+id/titulo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="dasjidsahdsajikmdnfjdsdsadasdaiadkomkdgifasko,dfasd"
-            tools:layout_editor_absoluteY="78dp"
-            tools:layout_editor_absoluteX="196dp" />
+            android:layout_column="1"
+            android:layout_row="0"
+            android:paddingStart="10dp"
+            android:paddingTop="20dp"
+            android:text="It,A coisa"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/categorias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_marginLeft="130dp"
+            android:layout_row="2"
+            android:text="Drama,Fantasia,Terror,Thriller" />
 
 
-    </android.support.constraint.ConstraintLayout>>
+    </GridLayout>
+
+
 </android.support.v7.widget.CardView>

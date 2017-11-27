@@ -1,14 +1,13 @@
-package com.example.mand4.projetofinal;
+package com.example.mand4.projetofinal.adaptador;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
+
+import com.example.mand4.projetofinal.R;
+import com.example.mand4.projetofinal.modelo.Noticia;
 
 import java.util.List;
 
@@ -34,12 +33,14 @@ public class ReciclerAdapter extends RecyclerView.Adapter{
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         NoiticiaHolder hoslder = (NoiticiaHolder) holder;
-        hoslder.getTitulo().setText(noticiaList.get(position).getOriginal_title());
+        hoslder.getTitulo().setText(noticiaList.get(position).getTitle());
+        hoslder.getAno().setText(noticiaList.get(position).getRelease_date().substring(0,4));
+        hoslder.getNota().setText(""+noticiaList.get(position).getVote_average());
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return noticiaList.size();
     }
 }

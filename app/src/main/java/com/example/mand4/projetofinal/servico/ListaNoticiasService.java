@@ -1,6 +1,7 @@
 package com.example.mand4.projetofinal.servico;
 
-import com.example.mand4.projetofinal.Noticia;
+import com.example.mand4.projetofinal.modelo.Catalogos;
+import com.example.mand4.projetofinal.modelo.Noticia;
 
 import java.util.List;
 
@@ -12,6 +13,6 @@ import retrofit2.http.GET;
  */
 
 public interface ListaNoticiasService {
-    @GET("/3/movie/popular?api_key=5e67360fafc93e4e61616f3678883c96&language=pt-BR")
-    Call<List<Noticia>> getNoticias();
+    @GET("3/movie/popular?api_key=5e67360fafc93e4e61616f3678883c96&language=pt-BR&page=1")
+    Call<Catalogos> getCatalogo();
 }

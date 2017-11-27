@@ -1,9 +1,8 @@
 package com.example.mand4.projetofinal.servico;
 
-import com.example.mand4.projetofinal.Noticia;
+import com.example.mand4.projetofinal.modelo.Noticia;
 
 import retrofit2.Call;
-import retrofit2.Retrofit;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 

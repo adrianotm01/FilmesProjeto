@@ -1,4 +1,4 @@
-package com.example.mand4.projetofinal;
+package com.example.mand4.projetofinal.modelo;
 
 /**
  * Created by mand4 on 21/11/2017.
