@@ -59,7 +59,7 @@ public class Main2ActivityFragment extends Fragment {
                     lista = response.body().getResults();
                     adaptador = new ReciclerAdapter(getContext(),lista);
                     recyclerView.setAdapter(adaptador);
-                    b.inserirFilmes(lista);
+                    b.inserirMaisVotados(lista);
                 }
 
 
