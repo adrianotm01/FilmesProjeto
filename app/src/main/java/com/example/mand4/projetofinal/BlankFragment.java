@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.BitmapTypeRequest;
+import com.bumptech.glide.Glide;
 import com.example.mand4.projetofinal.adaptador.ReciclerAdapter;
 import com.example.mand4.projetofinal.banco.BancoHelper;
 import com.example.mand4.projetofinal.modelo.Catalogos;
@@ -25,6 +27,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.bumptech.glide.Glide.with;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -34,6 +38,7 @@ public class BlankFragment extends Fragment {
     private List<Noticia> noticias;
     private RecyclerView reciclador;
     private ReciclerAdapter adapter;
+
     public BlankFragment() {
         // Required empty public constructor
     }
@@ -45,7 +50,7 @@ public class BlankFragment extends Fragment {
         reciclador = (RecyclerView) view.findViewById(R.id.reciclador);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         reciclador.setLayoutManager(manager);
-        if (b.listar().size() ==  0) {
+        if (b.listar().size() >  0) {
             Log.i("aqui","iu");
             noticias = b.listar();
         }
@@ -82,7 +87,11 @@ public class BlankFragment extends Fragment {
                     noticias = response.body().getResults();
                     adapter = new ReciclerAdapter(getContext(), noticias);
                     reciclador.setAdapter(adapter);
-                    b.inserir(noticias);
+                    b.inserirFilmes(noticias);
+                    BitmapTypeRequest<String> bitmap = Glide
+                            .with(getContext())
+                            .load("https://image.tmdb.org/t/p/w500/"+noticias.get(0).getPosterPath())
+                            .asBitmap();
                 }
 
                 @Override

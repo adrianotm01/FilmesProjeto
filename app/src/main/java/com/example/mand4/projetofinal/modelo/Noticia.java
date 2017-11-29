@@ -17,6 +17,8 @@ public class Noticia {
     private int runtime;
     private int id_filme;
     private long id;
+    private String poster_path;
+
     public Noticia(String title, String overview, int imagem, String original_title, double vote_average, String release_date, int runtime) {
         this.title = title;
         this.overview = overview;
@@ -103,4 +105,11 @@ public class Noticia {
         this.id = id;
     }
 
+    public String getPosterPath() {
+        return poster_path;
+    }
+
+    public void setPoster_path(String poster_path) {
+        this.poster_path = poster_path;
+    }
 }

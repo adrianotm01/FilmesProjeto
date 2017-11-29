@@ -2,6 +2,7 @@ package com.example.mand4.projetofinal.adaptador;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mand4.projetofinal.R;
@@ -16,12 +17,14 @@ public class NoiticiaHolder extends RecyclerView.ViewHolder{
     private TextView nota;
     private TextView categoria;
     private TextView mais;
+    private ImageView imagem;
     public NoiticiaHolder(View itemView) {
         super(itemView);
         titulo = (TextView) itemView.findViewById(R.id.titulo);
         ano = (TextView) itemView.findViewById(R.id.ano1);
         nota = (TextView) itemView.findViewById(R.id.nota);
         categoria = (TextView) itemView.findViewById(R.id.categorias);
+        imagem = (ImageView) itemView.findViewById(R.id.imageView2);
     }
 
     public TextView getTitulo() {
@@ -62,5 +65,13 @@ public class NoiticiaHolder extends RecyclerView.ViewHolder{
 
     public void setMais(TextView mais) {
         this.mais = mais;
+    }
+
+    public ImageView getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(ImageView imagem) {
+        this.imagem = imagem;
     }
 }

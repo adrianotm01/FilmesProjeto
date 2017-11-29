@@ -19,17 +19,27 @@ import java.util.List;
 public class BancoHelper extends SQLiteOpenHelper {
     private String texto = " TEXT";
     private String real = "REAL";
+
     private final String criar_Tabela = ("CREATE TABLE "+ NoticiaContrato.NoticiaEntry.tabela+"("+ NoticiaContrato.NoticiaEntry._ID
             +" INTEGER PRIMARY KEY, "+ NoticiaContrato.NoticiaEntry.title+texto+", "+ NoticiaContrato.NoticiaEntry.overview+
             texto+","+ NoticiaContrato.NoticiaEntry.runtime+texto+", "+NoticiaContrato.NoticiaEntry.original_title+texto+", "
             + NoticiaContrato.NoticiaEntry.data+" "+texto+", "+ NoticiaContrato.NoticiaEntry.nota+" "+real+", "+
-            NoticiaContrato.NoticiaEntry.idFilme+" INTEGER);");
+            NoticiaContrato.NoticiaEntry.idFilme+" INTEGER, "+ NoticiaContrato.NoticiaEntry.poster+texto+");");
+
+    private final String criar_TabelaMaisVotados = ("CREATE TABLE "+ NoticiaContrato.NoticiaEntry.tabela+"MaisVotados("+ NoticiaContrato.NoticiaEntry._ID
+            +" INTEGER PRIMARY KEY, "+ NoticiaContrato.NoticiaEntry.title+texto+", "+ NoticiaContrato.NoticiaEntry.overview+
+            texto+","+ NoticiaContrato.NoticiaEntry.runtime+texto+", "+NoticiaContrato.NoticiaEntry.original_title+texto+", "
+            + NoticiaContrato.NoticiaEntry.data+" "+texto+", "+ NoticiaContrato.NoticiaEntry.nota+" "+real+", "+
+            NoticiaContrato.NoticiaEntry.idFilme+" INTEGER, "+ NoticiaContrato.NoticiaEntry.poster+texto+");");
+
     public BancoHelper(Context context){
         super(context,"projeto_final",null,1);
     }
+
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(criar_Tabela);
+        sqLiteDatabase.execSQL(criar_TabelaMaisVotados);
     }
 
     @Override
@@ -47,6 +57,7 @@ public class BancoHelper extends SQLiteOpenHelper {
             contentValues.put(NoticiaContrato.NoticiaEntry.data, noticia.getRelease_date());
             contentValues.put(NoticiaContrato.NoticiaEntry.nota, noticia.getVote_average());
             contentValues.put(NoticiaContrato.NoticiaEntry.idFilme, noticia.getId_filme());
+            contentValues.put(NoticiaContrato.NoticiaEntry.poster,noticia.getPosterPath());
             db.insert(NoticiaContrato.NoticiaEntry.tabela, null, contentValues);
         }finally {
             db.close();
@@ -56,6 +67,16 @@ public class BancoHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         try {
             Cursor c = db.query(NoticiaContrato.NoticiaEntry.tabela,null,null,null,null,null,null);
+            return findAll(c);
+        }finally {
+            db.close();
+        }
+    }
+
+    public List<Noticia> listarMaisVotados(){
+        SQLiteDatabase db = getReadableDatabase();
+        try {
+            Cursor c = db.query(NoticiaContrato.NoticiaEntry.tabela+"MaisVotados",null,null,null,null,null,null);
             return findAll(c);
         }finally {
             db.close();
@@ -77,6 +98,7 @@ public class BancoHelper extends SQLiteOpenHelper {
                     not.setRuntime(c.getInt(c.getColumnIndexOrThrow(NoticiaContrato.NoticiaEntry.runtime)));
                     not.setId(c.getLong(c.getColumnIndexOrThrow(NoticiaContrato.NoticiaEntry._ID)));
                     not.setVote_average(c.getDouble(c.getColumnIndexOrThrow(NoticiaContrato.NoticiaEntry.nota)));
+                    not.setPoster_path(c.getString(c.getColumnIndex(NoticiaContrato.NoticiaEntry.poster)));
                     noticias.add(not);
                 } while (c.moveToNext());
             }
@@ -86,7 +108,7 @@ public class BancoHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void inserir(List<Noticia> list){
+    public void inserirFilmes(List<Noticia> list){
         SQLiteDatabase db = getWritableDatabase();
         try {
             for (int i = 0; i < list.size(); i++) {
@@ -97,6 +119,7 @@ public class BancoHelper extends SQLiteOpenHelper {
                 cv.put(NoticiaContrato.NoticiaEntry.data, list.get(i).getRelease_date());
                 cv.put(NoticiaContrato.NoticiaEntry.nota, list.get(i).getVote_average());
                 cv.put(NoticiaContrato.NoticiaEntry.idFilme, list.get(i).getId_filme());
+                cv.put(NoticiaContrato.NoticiaEntry.poster,list.get(i).getPosterPath());
                 db.insert(NoticiaContrato.NoticiaEntry.tabela, null, cv);
                 Log.i("testando","inseriu");
             }
@@ -104,4 +127,26 @@ public class BancoHelper extends SQLiteOpenHelper {
             db.close();
         }
     }
+
+    public void inserirMaisVotados(List<Noticia> list){
+        SQLiteDatabase db = getWritableDatabase();
+        try {
+            for (int i = 0; i < list.size(); i++) {
+                ContentValues cv = new ContentValues();
+                cv.put(NoticiaContrato.NoticiaEntry.title, list.get(i).getTitle());
+                cv.put(NoticiaContrato.NoticiaEntry.overview, list.get(i).getOverview());
+                cv.put(NoticiaContrato.NoticiaEntry.original_title, list.get(i).getOriginal_title());
+                cv.put(NoticiaContrato.NoticiaEntry.data, list.get(i).getRelease_date());
+                cv.put(NoticiaContrato.NoticiaEntry.nota, list.get(i).getVote_average());
+                cv.put(NoticiaContrato.NoticiaEntry.idFilme, list.get(i).getId_filme());
+                cv.put(NoticiaContrato.NoticiaEntry.poster,list.get(i).getPosterPath());
+                db.insert(NoticiaContrato.NoticiaEntry.tabela+"MaisVotados", null, cv);
+                Log.i("testando","inseriuMaisVotados");
+            }
+        }finally {
+            db.close();
+        }
+    }
+
+
 }

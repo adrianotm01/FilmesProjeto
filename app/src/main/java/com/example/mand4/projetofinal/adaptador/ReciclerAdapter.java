@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.example.mand4.projetofinal.BlankFragment;
 import com.example.mand4.projetofinal.R;
 import com.example.mand4.projetofinal.modelo.Noticia;
 
@@ -36,6 +38,9 @@ public class ReciclerAdapter extends RecyclerView.Adapter{
         hoslder.getTitulo().setText(noticiaList.get(position).getTitle());
         hoslder.getAno().setText(noticiaList.get(position).getRelease_date().substring(0,4));
         hoslder.getNota().setText(""+noticiaList.get(position).getVote_average());
+        Glide.with(contexto)
+                .load("https://image.tmdb.org/t/p/w300/"+noticiaList.get(position).getPosterPath()).
+                into(hoslder.getImagem());
 
     }
 

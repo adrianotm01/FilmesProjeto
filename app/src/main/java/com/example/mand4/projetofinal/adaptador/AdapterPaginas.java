@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.mand4.projetofinal.BlankFragment;
 import com.example.mand4.projetofinal.BlankFragment2;
+import com.example.mand4.projetofinal.BlankFragment3;
 
 /**
  * Created by mand4 on 21/11/2017.
@@ -23,8 +24,6 @@ public class AdapterPaginas extends FragmentPagerAdapter {
             case 0:
                 return new BlankFragment();
             case 1:
-                return new BlankFragment();
-            case 2:
                 return new BlankFragment2();
 
             default:
@@ -34,7 +33,7 @@ public class AdapterPaginas extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 
     @Override
@@ -44,8 +43,7 @@ public class AdapterPaginas extends FragmentPagerAdapter {
                 return "Filmes";
             case 1:
                 return "Series";
-            case 2:
-                return "Pessoas";
+
             default:
                 return null;
         }

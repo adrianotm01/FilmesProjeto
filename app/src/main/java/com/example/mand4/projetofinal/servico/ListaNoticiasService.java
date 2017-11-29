@@ -1,5 +1,6 @@
 package com.example.mand4.projetofinal.servico;
 
+import com.example.mand4.projetofinal.R;
 import com.example.mand4.projetofinal.modelo.Catalogos;
 import com.example.mand4.projetofinal.modelo.Noticia;
 
