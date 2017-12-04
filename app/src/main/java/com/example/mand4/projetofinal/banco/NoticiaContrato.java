@@ -15,7 +15,6 @@ public class NoticiaContrato {
         public static final String tabela = "filme";
         public static final String title = "titulo";
         public static final String overview = "descricao";
-        public static final String imagem = "imagem";
         public static final String original_title = "titulo_original";
         public static final String data = "data_lancamento";
         public static final String nota = "nota";

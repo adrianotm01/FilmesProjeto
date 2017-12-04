@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
-import com.example.mand4.projetofinal.BlankFragment;
 import com.example.mand4.projetofinal.R;
+import com.example.mand4.projetofinal.modelo.Genero;
 import com.example.mand4.projetofinal.modelo.Noticia;
 
 import java.util.List;
@@ -18,11 +18,18 @@ import java.util.List;
  */
 
 public class ReciclerAdapter extends RecyclerView.Adapter{
+    private List<Genero> generos;
     Context contexto;
     private List<Noticia> noticiaList;
     public ReciclerAdapter(Context contexto, List<Noticia> list) {
         this.contexto = contexto;
         noticiaList = list;
+    }
+
+    public ReciclerAdapter(Context context, List<Noticia> noticias, List<Genero> generos) {
+        this.contexto = context;
+        this.noticiaList = noticias;
+        this.generos = generos;
     }
 
     @Override
@@ -41,7 +48,20 @@ public class ReciclerAdapter extends RecyclerView.Adapter{
         Glide.with(contexto)
                 .load("https://image.tmdb.org/t/p/w300/"+noticiaList.get(position).getPosterPath()).
                 into(hoslder.getImagem());
-
+//        for (int i = 0; i <  noticiaList.size(); i++) {
+//            String concater = "";
+//            for (int j = 0; j < noticiaList.get(i).getGenre_ids().size(); j++) {
+//                for (int k = 0; k < generos.size() ; k++) {
+//                    if (noticiaList.get(i).getGenre_ids().get(j) == generos.get(k).getId()) {
+//                        Log.i(noticiaList.get(i).getTitle(),generos.get(k).getName());
+//                    }
+//                }
+//            }
+//
+//        }
+        if (position == noticiaList.size()-1){
+            
+        }
     }
 
     @Override

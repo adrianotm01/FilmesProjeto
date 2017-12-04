@@ -7,6 +7,16 @@ package com.example.mand4.projetofinal.modelo;
 public class Genero {
     private String name;
     private int id;
+
+    public Genero(String name, int id) {
+        this.name = name;
+        this.id = id;
+    }
+
+    public Genero() {
+
+    }
+
     public String getName() {
         return name;
     }

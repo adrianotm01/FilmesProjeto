@@ -5,7 +5,6 @@ package com.example.mand4.projetofinal.modelo;
  */
 
 public class Administrador {
-    private String nome;
-    private int foto;
-
+    private String login;
+    private String senha;
 }

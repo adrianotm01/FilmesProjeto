@@ -3,44 +3,43 @@ package com.example.mand4.projetofinal.modelo;
 import java.util.List;
 
 /**
- * Created by mand4 on 21/11/2017.
+ * Created by mand4 on 30/11/2017.
  */
 
-public class Noticia {
+public class Serie {
 
-    private String title;
+    private String name;
     private String overview;
-    private int imagem;
-    private String original_title;
+    private String original_name;
     private double vote_average;
-    private String release_date;
+    private String first_air_date;
     private int runtime;
-    private int id_filme;
     private long id;
     private String poster_path;
+    private String last_air_date;
     private List<Integer> genre_ids;
 
-    public Noticia(String title, String overview, int imagem, String original_title, double vote_average, String release_date, int runtime) {
-        this.title = title;
+    public Serie(String name, String overview, String original_name, double vote_average, String first_air_date, int runtime, int id_filme, String poster_path, String last_air_date) {
+        this.name = name;
         this.overview = overview;
-        this.imagem = imagem;
-        this.original_title = original_title;
+        this.original_name = original_name;
         this.vote_average = vote_average;
-        this.release_date = release_date;
+        this.first_air_date = first_air_date;
         this.runtime = runtime;
-        this.id = 0;
+        this.poster_path = poster_path;
+        this.last_air_date = last_air_date;
     }
 
-    public Noticia() {
+    public Serie() {
 
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getOverview() {
@@ -51,21 +50,14 @@ public class Noticia {
         this.overview = overview;
     }
 
-    public int getImagem() {
-        return imagem;
+    public String getOriginal_name() {
+        return original_name;
     }
 
-    public void setImagem(int imagem) {
-        this.imagem = imagem;
+    public void setOriginal_name(String original_name) {
+        this.original_name = original_name;
     }
 
-    public String getOriginal_title() {
-        return original_title;
-    }
-
-    public void setOriginal_title(String original_title) {
-        this.original_title = original_title;
-    }
     public double getVote_average() {
         return vote_average;
     }
@@ -74,12 +66,12 @@ public class Noticia {
         this.vote_average = vote_average;
     }
 
-    public String getRelease_date() {
-        return release_date;
+    public String getFirst_air_date() {
+        return first_air_date;
     }
 
-    public void setRelease_date(String release_date) {
-        this.release_date = release_date;
+    public void setFirst_air_date(String first_air_date) {
+        this.first_air_date = first_air_date;
     }
 
     public int getRuntime() {
@@ -90,14 +82,6 @@ public class Noticia {
         this.runtime = runtime;
     }
 
-    public int getId_filme() {
-        return id_filme;
-    }
-
-    public void setId_filme(int id_filme) {
-        this.id_filme = id_filme;
-    }
-
     public long getId() {
         return id;
     }
@@ -106,13 +90,22 @@ public class Noticia {
         this.id = id;
     }
 
-    public String getPosterPath() {
+    public String getPoster_path() {
         return poster_path;
     }
 
     public void setPoster_path(String poster_path) {
         this.poster_path = poster_path;
     }
+
+    public String getLast_air_date() {
+        return last_air_date;
+    }
+
+    public void setLast_air_date(String last_air_date) {
+        this.last_air_date = last_air_date;
+    }
+
     public List<Integer> getGenre_ids() {
         return genre_ids;
     }

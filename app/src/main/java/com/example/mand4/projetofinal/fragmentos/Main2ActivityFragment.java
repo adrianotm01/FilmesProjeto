@@ -1,4 +1,4 @@
-package com.example.mand4.projetofinal;
+package com.example.mand4.projetofinal.fragmentos;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mand4.projetofinal.R;
 import com.example.mand4.projetofinal.adaptador.ReciclerAdapter;
 import com.example.mand4.projetofinal.banco.BancoHelper;
 import com.example.mand4.projetofinal.modelo.Catalogos;
@@ -55,7 +56,6 @@ public class Main2ActivityFragment extends Fragment {
             call.enqueue(new Callback<Catalogos>() {
                 @Override
                 public void onResponse(Call<Catalogos> call, Response<Catalogos> response) {
-                    Log.i("pq nfoi",response.body().getResults().get(0).getPosterPath());
                     lista = response.body().getResults();
                     adaptador = new ReciclerAdapter(getContext(),lista);
                     recyclerView.setAdapter(adaptador);

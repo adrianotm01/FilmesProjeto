@@ -4,9 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.mand4.projetofinal.BlankFragment;
-import com.example.mand4.projetofinal.BlankFragment2;
-import com.example.mand4.projetofinal.BlankFragment3;
+import com.example.mand4.projetofinal.fragmentos.BlankFragment;
+import com.example.mand4.projetofinal.fragmentos.BlankFragment2;
 
 /**
  * Created by mand4 on 21/11/2017.

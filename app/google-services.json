@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "578988113581",
+    "firebase_url": "https://filmesprojeto.firebaseio.com",
+    "project_id": "filmesprojeto",
+    "storage_bucket": "filmesprojeto.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:578988113581:android:7bb44bdf6829d2a4",
+        "android_client_info": {
+          "package_name": "com.example.mand4.projetofinal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "578988113581-j4pch5279g454l4me151ffn5hnr928hq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDB8yZQ5JYbEdrR4uqwhG3KNdShjWLpBkU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

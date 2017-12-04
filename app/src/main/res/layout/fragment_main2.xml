@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mand4.projetofinal.Main2ActivityFragment"
+    tools:context="com.example.mand4.projetofinal.fragmentos.Main2ActivityFragment"
     android:orientation="vertical"
     tools:showIn="@layout/activity_main2">
     <android.support.v7.widget.RecyclerView

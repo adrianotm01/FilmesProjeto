@@ -1,4 +1,4 @@
-package com.example.mand4.projetofinal;
+package com.example.mand4.projetofinal.fragmentos;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mand4.projetofinal.R;
 import com.example.mand4.projetofinal.adaptador.ReciclerAdapter;
 import com.example.mand4.projetofinal.modelo.Noticia;
 
