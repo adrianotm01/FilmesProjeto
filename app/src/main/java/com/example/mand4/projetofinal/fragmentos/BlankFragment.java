@@ -2,6 +2,7 @@ package com.example.mand4.projetofinal.fragmentos;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,10 +22,12 @@ import com.example.mand4.projetofinal.adaptador.ReciclerAdapter;
 import com.example.mand4.projetofinal.banco.BancoHelper;
 import com.example.mand4.projetofinal.listener.OnItemClickListener;
 import com.example.mand4.projetofinal.listener.RecicladorListener;
+import com.example.mand4.projetofinal.modelo.CatalogoVideos;
 import com.example.mand4.projetofinal.modelo.Catalogos;
 import com.example.mand4.projetofinal.modelo.Genero;
 import com.example.mand4.projetofinal.modelo.Noticia;
 import com.example.mand4.projetofinal.servico.ListaNoticiasService;
+import com.google.android.youtube.player.YouTubeIntents;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -79,7 +82,7 @@ public class BlankFragment extends Fragment {
                 .baseUrl("https://api.themoviedb.org/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        ListaNoticiasService service = retrofit2.create(ListaNoticiasService.class);
+        final ListaNoticiasService service = retrofit2.create(ListaNoticiasService.class);
         Call<Catalogos> listCall = service.getCatalogo();
         if (noticias == null) {
             listCall.enqueue(new Callback<Catalogos>() {
@@ -127,14 +130,29 @@ public class BlankFragment extends Fragment {
             reciclador.addOnItemTouchListener(new RecicladorListener(getContext(), reciclador, new OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int posicao) {
-                    Toast.makeText(getContext(), "Clicouu", Toast.LENGTH_SHORT).show();
-                    if(auth.getCurrentUser() == null) {
-                        Intent i = new Intent(getContext(), Main5Activity.class);
-                        startActivity(i);
-                    }
-                    else{
-                        Log.i("teste",auth.getCurrentUser().getEmail());
-                    }
+//                    Toast.makeText(getContext(), "Clicouu", Toast.LENGTH_SHORT).show();
+//                    if(auth.getCurrentUser() == null) {
+//                        Intent i = new Intent(getContext(), Main5Activity.class);
+//                        startActivity(i);
+//                    }
+//                    else{
+//                        Log.i("teste",auth.getCurrentUser().getEmail());
+//                    }
+                    Call<CatalogoVideos> videos = service.getVideos(noticias.get(posicao).getId_filme());
+                    videos.enqueue(new Callback<CatalogoVideos>() {
+                        @Override
+                        public void onResponse(Call<CatalogoVideos> call, Response<CatalogoVideos> response) {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v="+response.body()
+                                    .getResults()
+                                    .get(0).getKey())));
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<CatalogoVideos> call, Throwable t) {
+
+                        }
+                    });
                 }
             }));
           //  TextView texxo = (TextView) getActivity().findViewById(R.id.categorias);

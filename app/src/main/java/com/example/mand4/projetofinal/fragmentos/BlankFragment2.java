@@ -1,5 +1,7 @@
 package com.example.mand4.projetofinal.fragmentos;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +13,10 @@ import android.view.ViewGroup;
 import com.example.mand4.projetofinal.R;
 import com.example.mand4.projetofinal.adaptador.AdaptadorSerie;
 import com.example.mand4.projetofinal.banco.BancoHelper;
+import com.example.mand4.projetofinal.listener.OnItemClickListener;
+import com.example.mand4.projetofinal.listener.RecicladorListener;
 import com.example.mand4.projetofinal.modelo.CatalogoSerie;
+import com.example.mand4.projetofinal.modelo.CatalogoVideos;
 import com.example.mand4.projetofinal.modelo.Serie;
 import com.example.mand4.projetofinal.servico.SerieService;
 import java.util.List;
@@ -48,7 +53,7 @@ public class BlankFragment2 extends Fragment {
                 .baseUrl("https://api.themoviedb.org/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        SerieService service = retrofit2.create(SerieService.class);
+        final SerieService service = retrofit2.create(SerieService.class);
         Call<CatalogoSerie> listCall = service.getSeries();
         if (series == null) {
             listCall.enqueue(new Callback<CatalogoSerie>() {
@@ -57,6 +62,26 @@ public class BlankFragment2 extends Fragment {
                     series = response.body().getResults();
                     adapter = new AdaptadorSerie(getContext(), series);
                     reciclador.setAdapter(adapter);
+                    reciclador.addOnItemTouchListener(new RecicladorListener(getContext(), reciclador, new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int posicao) {
+                            Call<CatalogoVideos> videos = service.getVideos((int)series.get(posicao).getId());
+                            videos.enqueue(new Callback<CatalogoVideos>() {
+                                @Override
+                                public void onResponse(Call<CatalogoVideos> call, Response<CatalogoVideos> response) {
+                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v="+response.body()
+                                            .getResults()
+                                            .get(0).getKey())));
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<CatalogoVideos> call, Throwable t) {
+                                    Log.i("error",t.getMessage());
+                                }
+                            });
+                        }
+                    }));
                     b.inserirSeries(series);
                     Log.i("insere","inseriu");
 //                    TextView texxo = (TextView) getActivity().findViewById(R.id.categorias);
@@ -81,8 +106,27 @@ public class BlankFragment2 extends Fragment {
         } else {
             series = b.listarSeries();
             adapter = new AdaptadorSerie(getContext(),series);
-            Log.i("else",series.get(0).getName());
             reciclador.setAdapter(adapter);
+            reciclador.addOnItemTouchListener(new RecicladorListener(getContext(), reciclador, new OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int posicao) {
+                    Call<CatalogoVideos> videos = service.getVideos((int)series.get(posicao).getId());
+                    videos.enqueue(new Callback<CatalogoVideos>() {
+                        @Override
+                        public void onResponse(Call<CatalogoVideos> call, Response<CatalogoVideos> response) {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v="+response.body()
+                                    .getResults()
+                                    .get(0).getKey())));
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<CatalogoVideos> call, Throwable t) {
+                            Log.i("error",t.getMessage());
+                        }
+                    });
+                }
+            }));
         }
 
         return view;
