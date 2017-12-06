@@ -48,64 +48,62 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-
-        SearchView searchView = (SearchView) menu.findItem(R.id.app_bar_search).getActionView();
-        searchView.setOnQueryTextListener(new SearchFiltro());
-        return true;
-    }
-    private class SearchFiltro implements SearchView.OnQueryTextListener{
-
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                if (query != null) {
-                    Retrofit retrofi = new Retrofit.Builder()
-                            .baseUrl("https://api.themoviedb.org/")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-                    ListaNoticiasService service = retrofi.create(ListaNoticiasService.class);
-                    Call<Catalogos> catalogosCall = service.getProcura(query);
-                    catalogosCall.enqueue(new Callback<Catalogos>() {
-                        @Override
-                        public void onResponse(Call<Catalogos> call, Response<Catalogos> response) {
-                            Log.i("procura",response.body().getResults().get(0).getTitle());
-                        }
-
-                        @Override
-                        public void onFailure(Call<Catalogos> call, Throwable t) {
-
-                        }
-                    });
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                Log.i("trocou", "mudou");
-                return false;
-            }
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }else if (id == R.id.logout){
-            deslogar();
-        }
-
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.main, menu);
+//
+//        SearchView searchView = (SearchView) menu.findItem(R.id.app_bar_search).getActionView();
+//        searchView.setOnQueryTextListener(new SearchFiltro());
+//        return true;
+//    }
+//    private class SearchFiltro implements SearchView.OnQueryTextListener{
+//
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                if (query != null) {
+//                    Retrofit retrofi = new Retrofit.Builder()
+//                            .baseUrl("https://api.themoviedb.org/")
+//                            .addConverterFactory(GsonConverterFactory.create())
+//                            .build();
+//                    ListaNoticiasService service = retrofi.create(ListaNoticiasService.class);
+//                    Call<Catalogos> catalogosCall = service.getProcura(query);
+//                    catalogosCall.enqueue(new Callback<Catalogos>() {
+//                        @Override
+//                        public void onResponse(Call<Catalogos> call, Response<Catalogos> response) {
+//                            Log.i("procura",response.body().getResults().get(0).getTitle());
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<Catalogos> call, Throwable t) {
+//
+//                        }
+//                    });
+//                }
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                Log.i("trocou", "mudou");
+//                return false;
+//            }
+//    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//
+//        return super.onOptionsItemSelected(item);
+//    }
     public void maisAvaliados(View view){
         Intent i = new Intent(this,Main2Activity.class);
         startActivity(i);

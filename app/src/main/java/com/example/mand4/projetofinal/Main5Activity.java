@@ -92,9 +92,7 @@ public class Main5Activity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.logout){
-            deslogar();
-        }
+
         return super.onOptionsItemSelected(item);
     }
 }

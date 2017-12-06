@@ -20,10 +20,12 @@ import retrofit2.http.Query;
 public interface ListaNoticiasService {
     @GET("3/movie/popular?api_key=5e67360fafc93e4e61616f3678883c96&language=pt-BR&page=1")
     Call<Catalogos> getCatalogo();
+    @GET("3/movie/popular?api_key=5e67360fafc93e4e61616f3678883c96&language=pt-BR")
+    Call<Catalogos> getPaginas(@Query("page")int page);
 
     @GET("3/movie/{movie_id}/videos?api_key=5e67360fafc93e4e61616f3678883c96&language=en-US")
     Call<CatalogoVideos> getVideos(@Path("movie_id") int movie_id);
 
-    @GET("3/search/movie?api_key=5e67360fafc93e4e61616f3678883c96&language=pt-BR&query={query}")
-    Call<Catalogos> getProcura(@Path("query") String query);
+    @GET("3/search/movie?api_key=5e67360fafc93e4e61616f3678883c96&language=pt-BR")
+    Call<Catalogos> getProcura(@Query("query") String query);
 }

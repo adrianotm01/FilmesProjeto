@@ -21,6 +21,8 @@ public class NoticiaContrato {
         public static final String idFilme = "id_filme";
         public static final String runtime = "tempo_duracao";
         public static final String poster = "caminho_poster";
+        public static final String backdrop = "caminho_drop";
+        public static final String orcamento = "orcamento";
     }
 
 }

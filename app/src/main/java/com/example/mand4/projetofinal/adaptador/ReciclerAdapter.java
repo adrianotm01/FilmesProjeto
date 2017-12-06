@@ -2,16 +2,26 @@ package com.example.mand4.projetofinal.adaptador;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.example.mand4.projetofinal.R;
+import com.example.mand4.projetofinal.banco.BancoHelper;
+import com.example.mand4.projetofinal.modelo.Catalogos;
 import com.example.mand4.projetofinal.modelo.Genero;
 import com.example.mand4.projetofinal.modelo.Noticia;
+import com.example.mand4.projetofinal.servico.ListaNoticiasService;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by mand4 on 21/11/2017.
@@ -20,6 +30,7 @@ import java.util.List;
 public class ReciclerAdapter extends RecyclerView.Adapter{
     private List<Genero> generos;
     Context contexto;
+    int cont = 2;
     private List<Noticia> noticiaList;
     public ReciclerAdapter(Context contexto, List<Noticia> list) {
         this.contexto = contexto;
@@ -48,6 +59,32 @@ public class ReciclerAdapter extends RecyclerView.Adapter{
         Glide.with(contexto)
                 .load("https://image.tmdb.org/t/p/w300/"+noticiaList.get(position).getPosterPath()).
                 into(hoslder.getImagem());
+        if(cont <= 4) {
+            if (position == noticiaList.size() - 1) {
+                Retrofit retrofit2 = new Retrofit.Builder()
+                        .baseUrl("https://api.themoviedb.org/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+                ListaNoticiasService servico = retrofit2.create(ListaNoticiasService.class);
+                Call<Catalogos> catalogos = servico.getPaginas(cont);
+                Log.i("adaptador", "meu");
+                catalogos.enqueue(new Callback<Catalogos>() {
+                    @Override
+                    public void onResponse(Call<Catalogos> call, Response<Catalogos> response) {
+                        noticiaList.addAll(response.body().getResults());
+                    }
+
+                    @Override
+                    public void onFailure(Call<Catalogos> call, Throwable t) {
+
+                    }
+                });
+                for (int i = position + 1; i < noticiaList.size(); i++) {
+                    notifyItemChanged(i);
+                }
+                cont++;
+            }
+        }
 //        for (int i = 0; i <  noticiaList.size(); i++) {
 //            String concater = "";
 //            for (int j = 0; j < noticiaList.get(i).getGenre_ids().size(); j++) {
@@ -59,10 +96,9 @@ public class ReciclerAdapter extends RecyclerView.Adapter{
 //            }
 //
 //        }
-        if (position == noticiaList.size()-1){
-            
-        }
+
     }
+
 
     @Override
     public int getItemCount() {

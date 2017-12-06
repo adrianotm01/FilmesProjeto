@@ -15,9 +15,11 @@ public class Noticia {
     private double vote_average;
     private String release_date;
     private int runtime;
+    private String backdrop_path;
     private int id_filme;
     private long id;
     private String poster_path;
+    private int revenue;
     private List<Integer> genre_ids;
 
     public Noticia(String title, String overview, int imagem, String original_title, double vote_average, String release_date, int runtime) {
@@ -33,6 +35,14 @@ public class Noticia {
 
     public Noticia() {
 
+    }
+
+    public int getRevenue() {
+        return revenue;
+    }
+
+    public void setRevenue(int revenue) {
+        this.revenue = revenue;
     }
 
     public String getTitle() {
@@ -119,5 +129,13 @@ public class Noticia {
 
     public void setGenre_ids(List<Integer> genre_ids) {
         this.genre_ids = genre_ids;
+    }
+
+    public String getBackdrop_path() {
+        return backdrop_path;
+    }
+
+    public void setBackdrop_path(String backdrop_path) {
+        this.backdrop_path = backdrop_path;
     }
 }

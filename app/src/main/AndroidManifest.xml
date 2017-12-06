@@ -51,7 +51,16 @@
         <activity
             android:name=".Main5Activity"
             android:label="Logar"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Main6Activity"
+            android:label="@string/title_activity_main6"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.mand4.projetofinal.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

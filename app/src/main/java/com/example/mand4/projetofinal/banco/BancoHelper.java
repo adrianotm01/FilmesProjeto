@@ -24,13 +24,14 @@ public class BancoHelper extends SQLiteOpenHelper {
 
     private final String criar_Tabela = ("CREATE TABLE "+ NoticiaContrato.NoticiaEntry.tabela+"("+ NoticiaContrato.NoticiaEntry._ID
             +" INTEGER PRIMARY KEY, "+ NoticiaContrato.NoticiaEntry.title+texto+", "+ NoticiaContrato.NoticiaEntry.overview+
-            texto+","+ NoticiaContrato.NoticiaEntry.runtime+texto+", "+NoticiaContrato.NoticiaEntry.original_title+texto+", "
+            texto+","+ NoticiaContrato.NoticiaEntry.runtime+" INTEGER"+", "+NoticiaContrato.NoticiaEntry.original_title+texto+", "
             + NoticiaContrato.NoticiaEntry.data+" "+texto+", "+ NoticiaContrato.NoticiaEntry.nota+" "+real+", "+
-            NoticiaContrato.NoticiaEntry.idFilme+" INTEGER, "+ NoticiaContrato.NoticiaEntry.poster+texto+");");
+            NoticiaContrato.NoticiaEntry.idFilme+" INTEGER, "+ NoticiaContrato.NoticiaEntry.poster+texto+","+
+            NoticiaContrato.NoticiaEntry.backdrop+texto+","+ NoticiaContrato.NoticiaEntry.orcamento+" INTEGER);");
 
     private final String criar_TabelaSerie = ("CREATE TABLE "+ SerieContrato.SerieEntry.tabela+"("+ SerieContrato.SerieEntry._ID
             +" INTEGER PRIMARY KEY, "+ SerieContrato.SerieEntry.nomeserie+texto+", "+ SerieContrato.SerieEntry.overview+
-            texto+","+ SerieContrato.SerieEntry.runtime+texto+", "+ SerieContrato.SerieEntry.original_name+texto+", "
+            texto+","+ SerieContrato.SerieEntry.runtime+" INTEGER"+", "+ SerieContrato.SerieEntry.original_name+texto+", "
             + SerieContrato.SerieEntry.first_air_date+texto+", "+ SerieContrato.SerieEntry.vote_average+" "+real+", "+
             SerieContrato.SerieEntry.id_serie+" INTEGER, "+ SerieContrato.SerieEntry.poster_path+texto+","+
             SerieContrato.SerieEntry.last_air_date+texto+");");
@@ -40,7 +41,8 @@ public class BancoHelper extends SQLiteOpenHelper {
             + NoticiaContrato.NoticiaEntry.overview+texto+","+ NoticiaContrato.NoticiaEntry.runtime+texto+", "
             +NoticiaContrato.NoticiaEntry.original_title+texto+", "+ NoticiaContrato.NoticiaEntry.data+" "+texto+", "
             + NoticiaContrato.NoticiaEntry.nota+" "+real+", "+NoticiaContrato.NoticiaEntry.idFilme+" INTEGER, "
-            + NoticiaContrato.NoticiaEntry.poster+texto+");");
+            + NoticiaContrato.NoticiaEntry.poster+texto +NoticiaContrato.NoticiaEntry.backdrop+texto+","
+            + NoticiaContrato.NoticiaEntry.orcamento+" INTEGER);");
 
     private final String criar_TabelaMaisVotadosSerie = ("CREATE TABLE "+ SerieContrato.SerieEntry.tabela+"MaisVotados("
             + SerieContrato.SerieEntry._ID+" INTEGER PRIMARY KEY, "+ SerieContrato.SerieEntry.nomeserie+texto+", "
@@ -128,6 +130,8 @@ public class BancoHelper extends SQLiteOpenHelper {
                     not.setId(c.getLong(c.getColumnIndexOrThrow(NoticiaContrato.NoticiaEntry._ID)));
                     not.setVote_average(c.getDouble(c.getColumnIndexOrThrow(NoticiaContrato.NoticiaEntry.nota)));
                     not.setPoster_path(c.getString(c.getColumnIndex(NoticiaContrato.NoticiaEntry.poster)));
+                    not.setBackdrop_path(c.getString(c.getColumnIndex(NoticiaContrato.NoticiaEntry.backdrop)));
+                    not.setRevenue(c.getInt(c.getColumnIndexOrThrow(NoticiaContrato.NoticiaEntry.orcamento)));
                     noticias.add(not);
                 } while (c.moveToNext());
             }
@@ -179,6 +183,9 @@ public class BancoHelper extends SQLiteOpenHelper {
                 cv.put(NoticiaContrato.NoticiaEntry.nota, list.get(i).getVote_average());
                 cv.put(NoticiaContrato.NoticiaEntry.idFilme, list.get(i).getId());
                 cv.put(NoticiaContrato.NoticiaEntry.poster,list.get(i).getPosterPath());
+                cv.put(NoticiaContrato.NoticiaEntry.runtime,list.get(i).getRuntime());
+                cv.put(NoticiaContrato.NoticiaEntry.backdrop,list.get(i).getBackdrop_path());
+                cv.put(NoticiaContrato.NoticiaEntry.orcamento,list.get(i).getRevenue());
                 db.insert(NoticiaContrato.NoticiaEntry.tabela, null, cv);
             }
         }finally {
@@ -198,6 +205,8 @@ public class BancoHelper extends SQLiteOpenHelper {
                 cv.put(NoticiaContrato.NoticiaEntry.nota, list.get(i).getVote_average());
                 cv.put(NoticiaContrato.NoticiaEntry.idFilme, list.get(i).getId());
                 cv.put(NoticiaContrato.NoticiaEntry.poster,list.get(i).getPosterPath());
+                cv.put(NoticiaContrato.NoticiaEntry.backdrop,list.get(i).getBackdrop_path());
+                cv.put(NoticiaContrato.NoticiaEntry.orcamento,list.get(i).getRevenue());
                 db.insert(NoticiaContrato.NoticiaEntry.tabela+"MaisVotados", null, cv);
             }
         }finally {

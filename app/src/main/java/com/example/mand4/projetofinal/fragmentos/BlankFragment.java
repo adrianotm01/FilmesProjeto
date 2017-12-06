@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.BitmapTypeRequest;
 import com.bumptech.glide.Glide;
 import com.example.mand4.projetofinal.Main5Activity;
+import com.example.mand4.projetofinal.Main6Activity;
 import com.example.mand4.projetofinal.R;
 import com.example.mand4.projetofinal.adaptador.ReciclerAdapter;
 import com.example.mand4.projetofinal.banco.BancoHelper;
@@ -69,21 +70,14 @@ public class BlankFragment extends Fragment {
         if (b.listar().size() >  0)
             noticias = b.listar();
 
-        if(b.listarGeneros().size() > 0)
-            generos = b.listarGeneros();
 
-        else {
-            gerarGenero();
-            b.inserirGenero(generos);
-        }
-
-
-        Retrofit retrofit2 = new Retrofit.Builder()
+        final Retrofit retrofit2 = new Retrofit.Builder()
                 .baseUrl("https://api.themoviedb.org/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         final ListaNoticiasService service = retrofit2.create(ListaNoticiasService.class);
         Call<Catalogos> listCall = service.getCatalogo();
+
         if (noticias == null) {
             listCall.enqueue(new Callback<Catalogos>() {
                 @Override
@@ -95,14 +89,34 @@ public class BlankFragment extends Fragment {
                     reciclador.addOnItemTouchListener(new RecicladorListener(getContext(), reciclador, new OnItemClickListener() {
                         @Override
                         public void onItemClick(View view, int posicao) {
-                            if(auth.getCurrentUser() == null) {
-                                Intent i = new Intent(getContext(), Main5Activity.class);
-                                startActivity(i);
-                            }
-                            else{
-                                Bundle b = new Bundle();
-                                b.putInt("id",noticias.get(posicao).getId_filme());
-                            }
+                            final Bundle bundle = new Bundle();
+                            bundle.putString("titulo",noticias.get(posicao).getTitle());
+                            bundle.putString("original",noticias.get(posicao).getOriginal_title());
+                            bundle.putString("descricao",noticias.get(posicao).getOverview());
+                            bundle.putString("caminho",noticias.get(posicao).getBackdrop_path());
+                            bundle.putDouble("nota",noticias.get(posicao).getVote_average());
+                            bundle.putInt("orcamento",noticias.get(posicao).getRevenue());
+                            bundle.putInt("tempo",noticias.get(posicao).getRuntime());
+                            bundle.putInt("id",noticias.get(posicao).getId_filme());
+                            ListaNoticiasService servico = retrofit2.create(ListaNoticiasService.class);
+//                           Call<CatalogoVideos>videosCall =  servico.getVideos(noticias.get(posicao).getId_filme());
+//                            videosCall.enqueue(new Callback<CatalogoVideos>() {
+//                                @Override
+//                                public void onResponse(Call<CatalogoVideos> call, Response<CatalogoVideos> response) {
+//                                    if (response.body().getResults() != null) {
+//                                        bundle.putString("chave",response.body().getResults().get(0).getKey());
+//                                    }
+//
+//                                }
+//
+//                                @Override
+//                                public void onFailure(Call<CatalogoVideos> call, Throwable t) {
+//
+//                                }
+//                            });
+                            Intent i = new Intent(getContext(), Main6Activity.class);
+                            i.putExtras(bundle);
+                            startActivity(i);
                         }
                     }));
 //                    TextView texxo = (TextView) getActivity().findViewById(R.id.categorias);
@@ -130,29 +144,36 @@ public class BlankFragment extends Fragment {
             reciclador.addOnItemTouchListener(new RecicladorListener(getContext(), reciclador, new OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int posicao) {
-//                    Toast.makeText(getContext(), "Clicouu", Toast.LENGTH_SHORT).show();
-//                    if(auth.getCurrentUser() == null) {
-//                        Intent i = new Intent(getContext(), Main5Activity.class);
-//                        startActivity(i);
-//                    }
-//                    else{
-//                        Log.i("teste",auth.getCurrentUser().getEmail());
-//                    }
-                    Call<CatalogoVideos> videos = service.getVideos(noticias.get(posicao).getId_filme());
-                    videos.enqueue(new Callback<CatalogoVideos>() {
-                        @Override
-                        public void onResponse(Call<CatalogoVideos> call, Response<CatalogoVideos> response) {
-                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v="+response.body()
-                                    .getResults()
-                                    .get(0).getKey())));
+                    final Bundle bundle = new Bundle();
+                    bundle.putString("titulo",noticias.get(posicao).getTitle());
+                    bundle.putString("original",noticias.get(posicao).getOriginal_title());
+                    bundle.putString("descricao",noticias.get(posicao).getOverview());
+                    bundle.putString("caminho",noticias.get(posicao).getBackdrop_path());
+                    bundle.putDouble("nota",noticias.get(posicao).getVote_average());
 
-                        }
-
-                        @Override
-                        public void onFailure(Call<CatalogoVideos> call, Throwable t) {
-
-                        }
-                    });
+                    bundle.putInt("orcamento",noticias.get(posicao).getRevenue());
+                    bundle.putInt("tempo",noticias.get(posicao).getRuntime());
+                    bundle.putInt("id",noticias.get(posicao).getId_filme());
+                    Log.i("dsa",noticias.get(posicao).getId_filme()+"");
+                    ListaNoticiasService servico = retrofit2.create(ListaNoticiasService.class);
+//                           Call<CatalogoVideos>videosCall =  servico.getVideos(noticias.get(posicao).getId_filme());
+//                            videosCall.enqueue(new Callback<CatalogoVideos>() {
+//                                @Override
+//                                public void onResponse(Call<CatalogoVideos> call, Response<CatalogoVideos> response) {
+//                                    if (response.body().getResults() != null) {
+//                                        bundle.putString("chave",response.body().getResults().get(0).getKey());
+//                                    }
+//
+//                                }
+//
+//                                @Override
+//                                public void onFailure(Call<CatalogoVideos> call, Throwable t) {
+//
+//                                }
+//                            });
+                    Intent i = new Intent(getContext(), Main6Activity.class);
+                    i.putExtras(bundle);
+                    startActivity(i);
                 }
             }));
           //  TextView texxo = (TextView) getActivity().findViewById(R.id.categorias);

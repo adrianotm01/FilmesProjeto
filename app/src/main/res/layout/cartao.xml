@@ -10,6 +10,7 @@
     app:contentPaddingLeft="5dp"
     app:contentPaddingRight="5dp"
     android:layout_marginTop="15dp"
+    app:cardCornerRadius="20dp"
     app:cardBackgroundColor="@color/cardview_light_background"
     android:foreground="?android:attr/selectableItemBackground"
     >
